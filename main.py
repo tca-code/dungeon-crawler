@@ -7,37 +7,32 @@ from game_start import game_start
 
 MAX_HP = 24
 
-'''
-1. Move
-2. Check space
-    0. If space was visited, do nothing
-    1. If item, pick up
-    2. If weapon, pick up
-    3. If monster, enter combat
-    4. If exit, win
-3. Take Action
-    1. Use item in inventory
-    2. Fight
-'''
-
 def main():
     state = game_start(MAX_HP)
     turns = 0
 
     while True:
+        '''
+        Anatomy of a Turn (Loop)
+        1. Clear the screen
+        2. Re-render the heads up display (HUD)
+        3. Check to see if we're in combat, if we are, complete the combat
+        4. If not in combat, let the user know what directions are available
+           and ask them what they want to do.
+        5. Check the new "square" to see if there's loot or a monster there
+        6. If there's loot, pick it up. If it's a monster, enter combat.
+        '''
         clear()
         render_hud(state, MAX_HP)
+        
+        if state["combat"]:
+            # TODO: write combat code
+            pass
 
-        if turns is 0:
-            pass
-        
-        if state["combat"] is not None:
-            # continue combat
-            pass
-        else:
-            
-        
+        # TODO: let the player know which directions are available
         cmd = run_cmd(input("> "))
+
+        # TODO: move the player based on their "cmd"
 
 
 if __name__ == "__main__":

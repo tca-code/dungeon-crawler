@@ -1,7 +1,6 @@
 from copy import deepcopy
 import random
 import math
-from lib.dot_prop import get
 
 def generate_dungeon(map_height, map_width):
     base_level = [[0

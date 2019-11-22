@@ -17,7 +17,6 @@ def init_state(player_name, starting_hp):
 
     initial_state = {
         "combat": None,
-        "victories": [],
         "player": {
             "hp": starting_hp,
             "name": player_name,

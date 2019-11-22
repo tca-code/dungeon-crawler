@@ -1,7 +1,6 @@
 from time import sleep
 
 from lib.clear import clear
-from lib.dot_prop import get
 
 from utils.render_hud import render_hud
 from utils.init_state import init_state
@@ -32,7 +31,7 @@ def game_start(max_hp):
 
     clear()
     render_hud(state, max_hp)
-    print(message("Of course! \"{} the {},\" that is what they used to call you.".format(get(state, "player.name"), get(state, "player.title"))))
+    print(message("Of course! \"{} the {},\" that is what they used to call you.".format((state["player"]["name"]), state["player"]["title"])))
     sleep(5)
 
     clear()
