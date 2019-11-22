@@ -43,3 +43,20 @@ Now that you have everything, let's run the code:
 $ python3 main.py
 ```
 
+## Features 
+
+### Feature 1 (Navigation)
+
+#### Background
+
+The dungeon is a 45x20 square grid with a wall around it. So rows 0 and 44 (the last row) are walls, and columns 0 and 19 (the last column) are walls.
+In addition, there are random obstacles placed inside dungeon that each occupy a single square.
+
+The player is placed somewhere in the last playable row (row 43) on a random column. The exit is placed somewhere on the first playable row (row 1) on a random column.
+
+The player's goal is to reach the exit.
+
+#### Rules
+1. The player can move `up`, `down`, `left`, and `right` and can do so by typing those commands when prompted.
+2. If you encounter a wall or an obstacle, the player cannot move into the square the wall or obstacle occupies. The player should also be notified that that square is a wall or obstacle.
+3. If the player enters the square that has the exit, the game should end, the player is victorious.
