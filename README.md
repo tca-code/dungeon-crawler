@@ -53,7 +53,7 @@ $ python3 main.py
 
 #### Background
 
-The dungeon is a 45x20 square grid with a wall around it. So rows 0 and 44 (the last row) are walls, and columns 0 and 19 (the last column) are walls.
+The dungeon is a 45x45 square grid with a wall around it. So rows 0 and 44 (the last row) are walls, and columns 0 and 44 (the last column) are walls.
 In addition, there are random obstacles placed inside dungeon that each occupy a single square.
 
 The player is placed somewhere in the last playable row (row 43) on a random column. The exit is placed somewhere on the first playable row (row 1) on a random column.
