@@ -4,7 +4,7 @@ from .get_epithet import get_epithet
 from .dungeon import generate_dungeon
 
 def init_state(player_name, starting_hp):
-    dungeon = generate_dungeon(45, 20)
+    dungeon = generate_dungeon(45, 45)
 
     suitable_coords = []
     y = len(dungeon) - 2
