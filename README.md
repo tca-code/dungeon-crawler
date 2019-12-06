@@ -23,6 +23,10 @@ To start, download the code using your commandline or Terminal.
 $ git clone https://github.com/tca-code/dungeon-crawler.git
 ```
 
+```
+$ cd dungeon-crawler
+```
+
 Next you are going to make a special "branch" that belongs to you for you to work on your game. We won't dive much into this, but for now the easiest way to make this happen is to copy the following:
 
 ```
