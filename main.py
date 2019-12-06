@@ -1,3 +1,5 @@
+import sys
+
 from lib.clear import clear
 
 from utils.render_hud import render_hud
