@@ -4,6 +4,7 @@ from lib.clear import clear
 
 from utils.render_hud import render_hud
 from utils.cmds import run_cmd
+from utils.message import message
 
 from game_start import game_start
 
