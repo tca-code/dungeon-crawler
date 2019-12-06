@@ -5,10 +5,13 @@ from utils.cmds import run_cmd
 
 from game_start import game_start
 
+args = sys.argv[1:]
+
 MAX_HP = 24
+SPEED_UP_TEXT = "--fast" in args
 
 def main():
-    state = game_start(MAX_HP)
+    state = game_start(MAX_HP, SPEED_UP_TEXT)
     turns = 0
 
     while True:
@@ -29,7 +32,7 @@ def main():
             # TODO: write combat code
             pass
 
-        # TODO: let the player know which directions are available
+        print(message("Which direction do you go?"))
         cmd = run_cmd(input("> "))
 
         # TODO: move the player based on their "cmd"
