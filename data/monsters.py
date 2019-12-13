@@ -1,4 +1,9 @@
-from dice import d
+from time import time
+import random
+import math
+
+from utils.dice import d
+
 
 MONSTERS_EASY = [
     {
@@ -81,3 +86,15 @@ DRAGON_KING = {
     "dmg": lambda: d(2, 12) + 15,
     "weapon": "NO SURVIVAL"
 }
+
+def get_random_monster():
+    val = d(1, 20)
+    if val == 20 and math.ceil(time()) % 2:
+        return DRAGON_KING
+    elif val == 18 or val == 19:
+        return random.choice(MONSTERS_HARD)
+    elif val < 18 and val > 12:
+        return random.choice(MONSTERS_MED)
+    else:
+        return random.choice(MONSTERS_EASY)
+    

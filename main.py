@@ -9,6 +9,7 @@ from utils.message import message
 
 from utils.square_exists import square_exists
 from utils.dice import d
+from data.monsters import get_random_monster
 
 from game_start import game_start
 
