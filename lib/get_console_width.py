@@ -3,7 +3,7 @@ import re
 
 def get_console_width():
     if os.name == "nt":
-        regexr = r"Lines: (\s)* (\d*)"
+        regexr = r"Columns: (\s)* (\d*)"
         output = os.popen("MODE", "r").read()
         match = re.split(regexr, output)
         return int(match[2])
