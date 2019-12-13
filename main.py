@@ -10,6 +10,8 @@ from utils.message import message
 from utils.square_exists import square_exists
 from utils.dice import d
 from data.monsters import get_random_monster
+from actions.monster_attack import monster_attack
+from actions.player_attack import player_attack
 
 from game_start import game_start
 
@@ -28,6 +30,11 @@ def main():
     state = game_start(MAX_HP, SPEED_UP_TEXT)
     turns = 0
 
+    def render_and_message(msg):
+        clear()
+        render_hud(state, MAX_HP)
+        print(message(msg))
+
     while True:
         '''
         Anatomy of a Turn (Loop)
@@ -43,11 +50,44 @@ def main():
         render_hud(state, MAX_HP)
         
         if state["combat"]:
+            monster = get_random_monster()
+            
+            render_and_message("A " + monster["name"].upper() + " has been provoked.")
+            sleep(1.5)
+            
+            mon_dmg = monster_attack(state, monster)
+            render_and_message("The " + monster["name"].upper() + " deals you " + str(mon_dmg) \
+                + " damage. You have " + str(state["player"]["hp"]) + " HP remaining.")
+            
+            # Combat loop
             while True:
-                clear()
-                render_hud(state, MAX_HP)
-                print(message(""))
-            pass
+                cmd = input("Do you attack? (Y/n) ")
+
+                if cmd.lower() is not "n":
+                    dmg = player_attack(state["player"], monster)
+                    render_and_message("You deal " + str(dmg) + " damange with your " + state["player"]["equipped_weapon"]["name"].upper()\
+                        + " the " + monster["name"].upper() + " has " + str(monster["hp"]) + " HP remaining.")
+                    sleep(1.5)
+
+                    mon_dmg = monster_attack(state, monster)
+                    render_and_message("The " + monster["name"].upper() + " deals you " + str(mon_dmg) \
+                        + " damage. You have " + str(state["player"]["hp"]) + " HP remaining.")
+                    sleep(1.5)
+                else:
+                    render_and_message("You attempt to flee but are thwarted")
+                
+                if state["player"]["hp"] <= 0:
+                    render_and_message("The " + monster["name"].upper() + " dances over your lifeless body.")
+                    sleep(2)
+                    render_and_message("GAME OVER")
+                    sleep(1)
+                    sys.exit()
+                
+                if monster["hp"] <= 0:
+                    render_and_message("You've defeated the " + monster["name"].upper() + ". You burn its corpse so it doesn't attract others.")
+                    sleep(2)
+                    state["combat"] = False
+                    break
 
         print(message("Which direction do you go?"))
         print(state["coords"])
@@ -78,9 +118,7 @@ def main():
         
         # Step 3: Check if square exists
         if not square_exists(state, next_square):
-            clear()
-            render_hud(state, MAX_HP)
-            print(message("Where you're trying to go is no place at all."))
+            render_and_message("Where you're trying to go is no place at all.")
             print("> ")
             sleep(1)
             continue
@@ -95,9 +133,7 @@ def main():
 
         # Step 5: collision logics
         if state["dungeon"][y][x] == 1:
-            clear()
-            render_hud(state, MAX_HP)
-            print(message("Looks like you hit a wall there bud. Maybe try a different direction."))
+            render_and_message("Looks like you hit a wall there bud. Maybe try a different direction.")
             print("> ")
             sleep(1)
             continue
@@ -107,9 +143,7 @@ def main():
         # TODO: check square
         if d(1, 20) > 10:
             state["combat"] = True
-            clear()
-            render_hud(state, MAX_HP)
-            print(message("There's something in the dark!"))
+            render_and_message("There's something in the dark!")
         else:
             state["combat"] = False
 
