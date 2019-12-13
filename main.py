@@ -8,6 +8,7 @@ from utils.cmds import run_cmd
 from utils.message import message
 
 from utils.square_exists import square_exists
+from utils.dice import d
 
 from game_start import game_start
 
@@ -41,7 +42,10 @@ def main():
         render_hud(state, MAX_HP)
         
         if state["combat"]:
-            # TODO: write combat code
+            while True:
+                clear()
+                render_hud(state, MAX_HP)
+                print(message(""))
             pass
 
         print(message("Which direction do you go?"))
@@ -100,6 +104,13 @@ def main():
         state["coords"] = next_square
         state["visited"].append(state["coords"])
         # TODO: check square
+        if d(1, 20) > 10:
+            state["combat"] = True
+            clear()
+            render_hud(state, MAX_HP)
+            print(message("There's something in the dark!"))
+        else:
+            state["combat"] = False
 
 
 if __name__ == "__main__":
