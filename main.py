@@ -67,7 +67,20 @@ def main():
                     dmg = player_attack(state["player"], monster)
                     render_and_message("You deal " + str(dmg) + " damange with your " + state["player"]["equipped_weapon"]["name"].upper()\
                         + " the " + monster["name"].upper() + " has " + str(monster["hp"]) + " HP remaining.")
-                    sleep(1.5)
+                    sleep(2)
+
+                    if state["player"]["hp"] <= 0:
+                        render_and_message("The " + monster["name"].upper() + " dances over your lifeless body.")
+                        sleep(2)
+                        render_and_message("GAME OVER")
+                        sleep(1)
+                        sys.exit()
+
+                    if monster["hp"] <= 0:
+                        render_and_message("You've defeated the " + monster["name"].upper() + ". You burn its corpse so it doesn't attract others.")
+                        sleep(2.7)
+                        state["combat"] = False
+                        break
 
                     mon_dmg = monster_attack(state, monster)
                     render_and_message("The " + monster["name"].upper() + " deals you " + str(mon_dmg) \
@@ -82,14 +95,8 @@ def main():
                     render_and_message("GAME OVER")
                     sleep(1)
                     sys.exit()
-                
-                if monster["hp"] <= 0:
-                    render_and_message("You've defeated the " + monster["name"].upper() + ". You burn its corpse so it doesn't attract others.")
-                    sleep(2)
-                    state["combat"] = False
-                    break
 
-        print(message("Which direction do you go?"))
+        render_and_message("Which direction do you go?")
         print(state["coords"])
         cmd = run_cmd(input("> "))
 

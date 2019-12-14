@@ -4,7 +4,6 @@ import math
 
 from utils.dice import d
 
-
 MONSTERS_EASY = [
     {
         "xp": 200,
