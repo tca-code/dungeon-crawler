@@ -151,6 +151,7 @@ def main():
         if d(1, 20) > 10:
             state["combat"] = True
             render_and_message("There's something in the dark!")
+            sleep(1.7)
         else:
             state["combat"] = False
 
